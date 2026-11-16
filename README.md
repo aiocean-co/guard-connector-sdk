@@ -42,10 +42,12 @@ guard-test-receiver --help
 
 ## Connect to Guard
 
-1. Open the intended organization and unit in Guard. Create a dedicated API key for the connector using your administrator's approved intake scope. The current tested Guard build accepts `tenant:api`, which has API ingestion and proxy permissions. Limit the key's lifetime and store it in a secret manager or protected environment.
+1. Open the intended organization and unit in Guard. In **API Keys → New API Key**, select **Guard Connector SDK (ingest only)** under **Key purpose**. This creates a dedicated key with only `events:ingest`. Limit its lifetime and store it in a secret manager or protected environment. If your Guard install lacks this option, upgrade Guard to a build that supports the scope.
 2. Produce a JSONL file with fresh UTC timestamps and route templates for the API you own. Use the [API observation schema](examples/api-observation.schema.json) and [contract](docs/contract.md).
 3. Set `GUARD_CONNECTOR_API_KEY` securely in the invoking environment. Run the same send command with the Guard HTTPS intake URL and the expected organization UUID. For desktop development, numeric loopback HTTP requires the explicit flag from the local example.
-4. In **API Discovery**, choose a window containing the observations and look up their method and route. Match the accepted count and preserve the request ID for support or reconciliation. The server derives organization and unit from the credential. The acknowledgement checks the organization, and API Discovery confirms scope and retained observations.
+4. Sign in to Guard with an operator account and open **API Discovery** in the same organization and unit. Choose a window containing the observations and look up their method and route. Match the accepted count and preserve the request ID for support or reconciliation. Guard derives organization and unit from the connector credential. The acknowledgement checks the organization, and API Discovery confirms scope and retained observations.
+
+The `events:ingest` key authorizes submitting API observations to `/v1/ingest/events`. Model proxying and API Discovery reads require separate credentials with the appropriate permissions. The SDK v0.1.0 client can use the dedicated key without changes.
 
 This version sends API observations through `/v1/ingest/events`. Its acknowledgement reports persistence and whether downstream analysis was enqueued. Findings, signed cloud or endpoint evidence, and approvals use their own Guard workflows.
 

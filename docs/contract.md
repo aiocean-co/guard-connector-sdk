@@ -16,7 +16,8 @@ The SDK rejects unknown fields, duplicate JSON keys, non-finite numbers, unsafe 
 ## Delivery and acknowledgements
 
 - Use the approved HTTPS intake endpoint. The client prevents redirects and inherited proxy configuration. A separate explicit switch enables HTTP on a numeric loopback address for local tests.
-- Pass the bearer credential in `GUARD_CONNECTOR_API_KEY` for the CLI or to the SDK client from a trusted secret source. The credential controls intake authority and exact tenant scope.
+- Create a dedicated key in the intended Guard organization and unit with exactly one scope, `events:ingest`. For API-based provisioning, an authorized operator can submit `{"label":"Guard Connector","scopes":["events:ingest"],"ttl_days":1}` to `POST /v1/org/api-keys` on the identity service. The resulting key grants event ingestion only.
+- Pass the bearer credential in `GUARD_CONNECTOR_API_KEY` for the CLI or to the SDK client from a trusted secret source. The credential controls intake authority and exact tenant scope. Use a separate operator credential to inspect API Discovery or revoke the key.
 - The client sets a fresh `x-request-id` for each POST. Success requires HTTP 200, the response trace ID, the expected organization, and the exact accepted count. The receipt also carries Guard's reported downstream enqueue state.
 - The organization check occurs **after** delivery. Confirm the credential's exact organization and unit before sending. The intake response currently omits the unit. Verify the selected unit in the Guard workspace.
 - CLI exit codes are 0 for valid input or confirmed success, 2 for invalid input or configuration, 3 for a recognized HTTP rejection, and 4 for an unknown delivery outcome. The client attempts one POST. A timeout, redirect or unusable acknowledgement needs reconciliation before retry. The CLI logs a trace ID and safe error code for failed sends.
