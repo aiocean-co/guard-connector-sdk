@@ -1,0 +1,4 @@
+include CONTRIBUTING.md SECURITY.md
+recursive-include docs *.md
+include examples/api-observation.schema.json examples/events.jsonl
+recursive-include tests *.py

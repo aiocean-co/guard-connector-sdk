@@ -1,0 +1,2 @@
+{"timestamp":"2025-01-15T09:30:00-05:00","api_route":"/demo/orders/{order_id}?sample_flag=fixture","http_method":"get","status_code":200,"latency_ms":18,"response_bytes":152}
+{"timestamp":"2025-01-15T14:30:03Z","api_route":"/demo/orders","http_method":"POST","status_code":201,"request_id":"8f0070de-5ebd-4b09-93ba-81581c0f308e","latency_ms":31,"request_bytes":60,"response_bytes":118}

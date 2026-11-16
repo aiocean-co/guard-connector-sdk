@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: MPL-2.0
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "guard-connector-sdk"
+version = "0.1.0"
+description = "A standalone Connector SDK for QubitOceans Guard API observations"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MPL-2.0"
+license-files = ["LICENSE"]
+dependencies = []
+
+[project.scripts]
+guard-connector = "guard_connector_sdk.__main__:main"
+guard-test-receiver = "guard_connector_sdk.receiver:main"
+
+[tool.setuptools]
+packages = ["guard_connector_sdk"]
