@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "guard-connector-sdk"
-version = "0.1.0"
+version = "0.1.1"
 description = "A standalone Connector SDK for QubitOceans Guard API observations"
 readme = "README.md"
 requires-python = ">=3.11"

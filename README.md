@@ -47,7 +47,7 @@ guard-test-receiver --help
 3. Set `GUARD_CONNECTOR_API_KEY` securely in the invoking environment. Run the same send command with the Guard HTTPS intake URL and the expected organization UUID. For desktop development, numeric loopback HTTP requires the explicit flag from the local example.
 4. Sign in to Guard with an operator account and open **API Discovery** in the same organization and unit. Choose a window containing the observations and look up their method and route. Match the accepted count and preserve the request ID for support or reconciliation. Guard derives organization and unit from the connector credential. The acknowledgement checks the organization, and API Discovery confirms scope and retained observations.
 
-The `events:ingest` key authorizes submitting API observations to `/v1/ingest/events`. Model proxying and API Discovery reads require separate credentials with the appropriate permissions. The SDK v0.1.0 client can use the dedicated key without changes.
+The `events:ingest` key authorizes submitting API observations to `/v1/ingest/events`. Model proxying and API Discovery reads require separate credentials with the appropriate permissions. SDK v0.1.1 includes this setup guide. Existing v0.1.0 clients can also use the dedicated key.
 
 This version sends API observations through `/v1/ingest/events`. Its acknowledgement reports persistence and whether downstream analysis was enqueued. Findings, signed cloud or endpoint evidence, and approvals use their own Guard workflows.
 
